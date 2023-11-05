@@ -41,7 +41,7 @@ def submit():
 
     approved = False
 
-    if ltv < 0.9 and dti < 0.43 and fedti < 0.28:
+    if ltv < 0.95 and dti < 0.43 and fedti < 0.28:
         approved = True
 
     return render_template('results.html', gmi=f"{gmi:.2f}", ccp=f"{ccp:.2f}", cp=f"{cp:.2f}", slp=f"{slp:.2f}", av=f"{av:.2f}", dp=f"{dp:.2f}", la=f"{la:.2f}", mmp=f"{mmp:.2f}", cs=f"{cs:.2f}", goodCredit=goodCredit, pmiRate=f"{pmiRate:.2f}", ltv=f"{ltv:.2f}", monthlyDebt=f"{monthlyDebt:.2f}", dti=f"{dti:.2f}", fedti=f"{fedti:.2f}", approved=approved)
