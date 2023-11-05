@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>Approval Calculator</title>
+    <title>Loan Approval Calculator</title>
     <style>
         body {
             background-color: #0d2242;
@@ -41,8 +41,8 @@
             box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
         }
 
-        button.btn-primary {
-            background-color: #007bff;
+        .btn-primary {
+            background-color: #2465c7;
             border: none;
             color: #fff;
             padding: 10px 20px;
@@ -50,90 +50,55 @@
             transition: background-color 0.3s, transform 0.3s;
         }
 
-        button.btn-primary:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-        .navbar {
+        .btn-primary:hover {
             background-color: #0d2242;
-        }
-
-        .navbar a {
-            color: #fff;
-        }
-
-        .navbar-logo {
-            width: 200px; /* Set the desired width */
-            height: auto; /* Maintain aspect ratio */
-            margin-right: auto;
-        }
-
-        .navbar-nav {
-            margin-left: auto;
+            transform: scale(1.05);
         }
     </style>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#"><img src="assests/mae logo.png" alt="Fannie Mae Logo" width = 200px height = 200px class="navbar-logo"></a>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="navbar-brand" href="#">Approval Calculator</a>
-            </li>
-            <li class="nav-item">
-                <a class="navbar-brand" href="#">Helpful Links</a>
-            </li>
-            <li class="nav-item">
-                <a class="navbar-brand" href="#">Contact</a>
-            </li>
-        </ul>
-    </nav>
-    
-    <div class="container mt-5">
+    <div class="container">
         <h1 class="mt-5">Loan Approval Calculator</h1>
-        <form method="post" action="/submit" class="mt-4">
+        <form id="loanForm" class="mt-4">
             <div class="form-group">
                 <label for="gmi">Enter Gross Monthly Income:</label>
-                <input type="text" class="form-control" name="gmi" id="gmi" placeholder="Enter Gross Monthly Income">
-            </div>
-            <div class="form-group">
+                <input type="text" class="form-control" name="gmi" id="gmi" placeholder="Enter Gross Monthly Income" required>
                 <label for="ccp">Credit Card Payment:</label>
-                <input type="text" class="form-control" name="ccp" id="ccp" placeholder="Enter Credit Card Payment">
-            </div>
-            <div class="form-group">
+                <input type="text" class="form-control" name="ccp" id="ccp" placeholder="Enter Credit Card Payment" required>
                 <label for="cp">Enter Car Payment:</label>
-                <input type="text" class="form-control" name="cp" id="cp" placeholder="Enter Car Payment">
-            </div>
-            <div class="form-group">
+                <input type="text" class="form-control" name="cp" id="cp" placeholder="Enter Car Payment" required>
                 <label for="slp">Enter Student Loan Payments:</label>
-                <input type="text" class="form-control" name="slp" id="slp" placeholder="Enter Student Loan Payments">
-            </div>
-            <div class="form-group">
+                <input type="text" class="form-control" name="slp" id="slp" placeholder="Enter Student Loan Payments" required>
                 <label for="av">Enter Appraised Value:</label>
-                <input type="text" class="form-control" name="av" id="av" placeholder="Enter Appraised Value">
-            </div>
-            <div class="form-group">
+                <input type="text" class="form-control" name="av" id="av" placeholder="Enter Appraised Value" required>
                 <label for="dp">Enter Down Payment:</label>
-                <input type="text" class="form-control" name="dp" id="dp" placeholder="Enter Down Payment">
-            </div>
-            <div class="form-group">
+                <input type="text" class="form-control" name="dp" id="dp" placeholder="Enter Down Payment" required>
                 <label for="la">Enter Loan Amount:</label>
-                <input type="text" class="form-control" name="la" id="la" placeholder="Enter Loan Amount">
-            </div>
-            <div class="form-group">
+                <input type="text" class="form-control" name="la" id="la" placeholder="Enter Loan Amount" required>
                 <label for="mmp">Enter Monthly Mortgage Payment:</label>
-                <input type="text" class="form-control" name="mmp" id="mmp" placeholder="Enter Monthly Mortgage Payment">
-            </div>
-            <div class="form-group">
+                <input type="text" class="form-control" name="mmp" id="mmp" placeholder="Enter Monthly Mortgage Payment" required>
                 <label for="cs">Enter Credit Score:</label>
-                <input type="text" class="form-control" name="cs" id="cs" placeholder="Enter Credit Score">
+                <input type="text" class="form-control" name="cs" id="cs" placeholder="Enter Credit Score" required>
             </div>
-        
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Calculate</button>
         </form>
+        <div id="result" class="mt-4"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        const calculateButton = document.getElementById("calculateButton");
+        calculateButton.addEventListener("mouseenter", function () {
+            // Change background color when the mouse enters the button
+            calculateButton.style.backgroundColor = "#0d2242";
+        });
+
+        calculateButton.addEventListener("mouseleave", function () {
+            // Revert to the original background color when the mouse leaves the button
+            calculateButton.style.backgroundColor = "#2465c7";
+        });
+    </script>
 </body>
 </html>
