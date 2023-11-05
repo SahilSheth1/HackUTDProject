@@ -2,28 +2,64 @@
 <html>
 <head>
     <title>Result</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background-color: #fff;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 30px;
+            text-align: center;
+            color: #0d2242;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .approved {
+            color: #28a745; /* Green color for "Approved" */
+            font-weight: bold;
+        }
+
+        .not-approved {
+            color: #dc3545; /* Red color for "Not Approved" */
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1>Calculated Values</h1>
-    <p>Gross Monthly Income: {{ gmi }}</p>
-    <p>Credit Card Payment: {{ ccp }}</p>
-    <p>Car Payment: {{ cp }}</p>
-    <p>Student Loan Payment: {{ slp }}</p>
-    <p>Appraised Value: {{ av }}</p>
-    <p>Down Payment: {{ dp }}</p>
-    <p>Loan Amount: {{ la }}</p>
-    <p>Monthly Mortgage Payment: {{ mmp }}</p>
-    <p>Credit Score: {{ cs }}</p>
-    <p>Credit Rating: {{ goodCredit }}</p>
-    <p>Loan To Value Ratio: {{ ltv }}</p>
-    <p>Private Mortgage Insurance Rate: {{ pmiRate }}</p>
-    <p>Monthly Debt: {{ monthlyDebt }}</p>
-    <p>DTI: {{ dti }}</p>
-    <p>FEDTI: {{ fedti }}</p>
-    {% if approved %}
-        <p>Approved</p>
-    {% else %}
-        <p>Not Approved</p>
-    {% endif %}
+    <div class="container">
+        <h1 class="mt-4">Calculated Values</h1>
+        <p><strong>Gross Monthly Income:</strong> ${{ gmi }}</p>
+        <p><strong>Credit Card Payment:</strong> ${{ ccp }}</p>
+        <p><strong>Car Payment:</strong> ${{ cp }}</p>
+        <p><strong>Student Loan Payment:</strong> ${{ slp }}</p>
+        <p><strong>Appraised Value:</strong> ${{ av }}</p>
+        <p><strong>Down Payment:</strong> ${{ dp }}</p>
+        <p><strong>Loan Amount:</strong> ${{ la }}</p>
+        <p><strong>Monthly Mortgage Payment:</strong> ${{ mmp }}</p>
+        <p><strong>Credit Score:</strong> {{ cs }}</p>
+        <p><strong>Credit Rating:</strong> {{ goodCredit }}</p>
+        <p><strong>Loan To Value Ratio:</strong> {{ ltv }}</p>
+        <p><strong>Private Mortgage Insurance Rate:</strong> {{ pmiRate }}</p>
+        <p><strong>Monthly Debt:</strong> ${{ monthlyDebt }}</p>
+        <p><strong>DTI:</strong> {{ dti }}</p>
+        <p><strong>FEDTI:</strong> {{ fedti }}</p>
+
+        <p class="{% if approved %}approved{% else %}not-approved{% endif %}">
+            {% if approved %}Approved{% else %}Not Approved{% endif %}
+        </p>
+    </div>
 </body>
 </html>
