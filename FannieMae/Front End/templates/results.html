@@ -153,20 +153,19 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <script>
-        var appraisedValue = {{ av|safe }};
+        var appraisedValue = {{ av }};
         var downPayment = {{ dp|safe }};
-        var loanToValueRatio = {{ ltv|safe }};
     
         var chartType = 'bar'; // Default chart type is bar
     
         var data = {
-            labels: ["Appraised Value", "Down Payment", "Loan To Value Ratio"],
+            labels: ["Appraised Value", "Down Payment"],
             datasets: [{
                 label: "Property Comparison",
                 backgroundColor: "rgba(75, 192, 192, 0.2)",
                 borderColor: "rgba(75, 192, 192, 1)",
                 borderWidth: 1,
-                data: [appraisedValue, downPayment, loanToValueRatio]
+                data: [appraisedValue, downPayment]
             }]
         };
     
@@ -210,16 +209,16 @@
 
         var gmi = {{ gmi|safe }};
         var monthlyDebt = {{ monthlyDebt|safe }};
-        var dti = {{ dti|safe }};
+
 
     var incomeDebtData = {
-        labels: ["Gross Monthly Income", "Monthly Debt", "Debt-To-Income Ratio"],
+        labels: ["Gross Monthly Income", "Monthly Debt"],
         datasets: [{
             label: "Income and Debt Comparison",
             backgroundColor: "rgba(255, 99, 132, 0.2)",
             borderColor: "rgba(255, 99, 132, 1)",
             borderWidth: 1,
-            data: [gmi, monthlyDebt, dti]
+            data: [gmi, monthlyDebt]
         }]
     };
 
@@ -265,16 +264,15 @@
 
     var mmp = {{ mmp|safe }};
     var gmi = {{ gmi|safe }};
-    var fedti = {{ fedti|safe }};
 
     var mortgageIncomeFEDTIData = {
-        labels: ["Monthly Mortgage Payment", "Gross Monthly Income", "Front-End Debt-To-Income Ratio"],
+        labels: ["Monthly Mortgage Payment", "Gross Monthly Income"],
         datasets: [{
-            label: "Mortgage, Income, and FEDTI Comparison",
+            label: "Mortgage, Income,",
             backgroundColor: "rgba(255, 206, 86, 0.2)",
             borderColor: "rgba(255, 206, 86, 1)",
             borderWidth: 1,
-            data: [mmp, gmi, fedti]
+            data: [mmp, gmi]
         }]
     };
 

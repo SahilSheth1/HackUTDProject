@@ -1,21 +1,52 @@
-<!DOCTYPE html>
-<html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Helpful Links / FAQ </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>Helpful Links / FAQ</title>
     <style>
+        body {
+            background-color: #0d2242;
+        }
+
+        .container {
+            background-color: #fff;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #0d2242;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            color: #0d2242;
+            font-weight: bold;
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+
         .navbar {
             background-color: #0d2242;
-            transition: background-color 0.3s;
         }
 
         .navbar-light .navbar-toggler-icon {
-            background-color: #fff; 
+            background-color: #fff;
         }
 
         .navbar-light .navbar-nav .nav-link {
             color: #0d2242;
-            transition: color 0.3s;
         }
 
         .navbar-light .navbar-nav .nav-link:hover {
@@ -44,5 +75,116 @@
             </ul>
         </div>
     </nav>
+
+    <div class="container">
+        <h1 style="margin-bottom: 20px;">Helpful Links</h1>
+        <h2 class = "h2"><a href="https://www.hsh.com/first-time-homebuyer/down-payment-size.html" target="_blank">Down Payments</a></h2>
+        <iframe src="https://www.hsh.com/first-time-homebuyer/down-payment-size.html" style="width: 100%; height: 400px; border: none;"></iframe>
+    
+        <h2 class = "h2"><a href="https://www.bankrate.com/mortgages/basics-of-private-mortgage-insurance-pmi/" target="_blank">Private Mortgage Insurance</a></h2>
+        <iframe src="https://www.bankrate.com/mortgages/basics-of-private-mortgage-insurance-pmi/" style="width: 100%; height: 400px; border: none;"></iframe>
+    
+        <h2 class = "h2"><a href="https://www.nerdwallet.com/m/loans/personal-loans/credit-card-consolidation-loans?utm_source=goog&utm_medium=cpc&utm_campaign=pl_mktg_paid_roundup_cc_consolidation&utm_term=kwd-299692350614&utm_content=ta&mktg_hline=154639457708&mktg_place=best%20credit%20card%20loans&affiliateId=1347&affiliateName=Google_PL_MP&subId1=pl_mktg_paid_roundup_cc_consolidation&subId2=154639457708&subId3=kwd-299692350614&subId4=648452762144&subId5=&subId6=c&subId7=p&subId8=g&gad=1&gclid=CjwKCAjw15eqBhBZEiwAbDomEnXT_S54YYq-V-MmW2vBtHXSDTHjNg3IJWcvsuRKUE6Cs7_bdALp_SRoCTmQQAvD_BwE" target="_blank">Personal Loans and Credit Card Consolidation</a></h2>
+        <iframe src="https://www.nerdwallet.com/m/loans/personal-loans/credit-card-consolidation-loans?utm_source=goog&utm_medium=cpc&utm_campaign=pl_mktg_paid_roundup_cc_consolidation&utm_term=kwd-299692350614&utm_content=ta&mktg_hline=154639457708&mktg_place=best%20credit%20card%20loans&affiliateId=1347&affiliateName=Google_PL_MP&subId1=pl_mktg_paid_roundup_cc_consolidation&subId2=154639457708&subId3=kwd-299692350614&subId4=648452762144&subId5=&subId6=c&subId7=p&subId8=g&gad=1&gclid=CjwKCAjw15eqBhBZEiwAbDomEnXT_S54YYq-V-MmW2vBtHXSDTHjNg3IJWcvsuRKUE6Cs7_bdALp_SRoCTmQQAvD_BwE" style="width: 100%; height: 400px; border: none;"></iframe>
+    </div>
+    
+
+    <body>
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <div class="faq">
+                <div class="faq-item">
+                    <div class="faq-question" data-toggle="collapse" data-target="#faq1">
+                        What is a Credit Score?
+                    </div>
+                    <div id="faq1" class="faq-answer collapse">
+                        A credit score is a numerical representation of an individual's creditworthiness. It is a three-digit number that summarizes a person's credit history, financial behavior, and credit management. Lenders, such as banks, credit card companies, and mortgage lenders, use credit scores to assess the risk of lending money to a borrower. The most commonly used credit score models are provided by FICO (Fair Isaac Corporation) and VantageScore, which are used by many financial institutions.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-toggle="collapse" data-target="#faq2">
+                        What is a Loan?
+                    </div>
+                    <div id="faq2" class="faq-answer collapse">
+                        A loan is a financial arrangement where one party, typically a lender, provides money or resources to another party, known as the borrower, with the expectation that the borrower will repay the borrowed amount, usually with interest, over a specified period of time. Loans are a common financial tool used by individuals, businesses, and governments to access funds for various purposes.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-toggle="collapse" data-target="#faq3">
+                        What is a Mortgage?
+                    </div>
+                    <div id="faq3" class="faq-answer collapse">
+                        A mortgage is a specific type of loan used to purchase real estate, typically a home or a piece of property. It is a long-term financial arrangement in which a lender provides funds to a borrower to buy a property, and the borrower agrees to repay the loan, usually over an extended period, often 15 to 30 years
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-toggle="collapse" data-target="#faq4">
+                        What is Debt?
+                    </div>
+                    <div id="faq4" class="faq-answer collapse">
+                        Debt is a financial obligation or liability that arises when one party, known as the debtor or borrower, borrows money or resources from another party, known as the creditor or lender, with the promise to repay the borrowed amount along with any agreed-upon interest or fees over a specified period.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-toggle="collapse" data-target="#faq5">
+                        How do I get a lower interest rate loan or credit card?
+                    </div>
+                    <div id="faq5" class="faq-answer collapse">
+                        Getting a lower interest rate on a loan or credit card typically involves a combination of factors, including your creditworthiness, negotiation skills, and market conditions.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-toggle="collapse" data-target="#faq6">
+                        How do I get a lower interest rate loan or credit card?
+                    </div>
+                    <div id="faq6" class="faq-answer collapse">
+                        Getting a lower interest rate on a loan or credit card typically involves a combination of factors, including your creditworthiness, negotiation skills, and market conditions.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-toggle="collapse" data-target="#faq7">
+                        What is a down payment?
+                    </div>
+                    <div id="faq7" class="faq-answer collapse">
+                        A down payment is a lump sum payment made upfront when you're purchasing a big-ticket item, such as a home, a car, or another expensive asset
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-toggle="collapse" data-target="#faq8">
+                        What is a Loan To Value Ratio (LTV)?
+                    </div>
+                    <div id="faq8" class="faq-answer collapse">
+                        The Loan-to-Value (LTV) ratio is a financial term commonly used in the context of lending, particularly in real estate and mortgage transactions. It is a ratio that expresses the relationship between the amount of a loan and the appraised value or purchase price of an asset, usually a property. Lenders use the LTV ratio to assess risk when providing loans. 
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-toggle="collapse" data-target="#faq9">
+                        What is a Private Mortgage Insurance (PMI)?
+                    </div>
+                    <div id="faq9" class="faq-answer collapse">
+                        Private Mortgage Insurance (PMI) is a type of insurance that is often required by lenders when a homebuyer makes a down payment of less than 20% of the home's purchase price. PMI is designed to protect the lender in case the borrower defaults on the mortgage. It does not provide any benefit or protection to the borrower; instead, it allows borrowers to obtain a mortgage when they have a down payment that is less than the typical 20% threshold.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-toggle="collapse" data-target="#faq10">
+                        What is a Debt To Income Ratio (DTI)?
+                    </div>
+                    <div id="faq10" class="faq-answer collapse">
+                        DTI stands for Debt-to-Income ratio, and it is a financial metric used by lenders to assess a borrower's ability to manage their existing debt and take on additional debt, such as a mortgage or a loan. DTI is an important factor in determining whether a borrower qualifies for a loan, and it helps lenders gauge the level of financial risk associated with lending to an individual. The DTI ratio is typically expressed as a percentage and is calculated by dividing a borrower's total monthly debt payments by their gross monthly income
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-toggle="collapse" data-target="#faq11">
+                        What is a Front-End Debt To Income Ratio (FEDTI)?
+                    </div>
+                    <div id="faq11" class="faq-answer collapse">
+                        FEDTI stands for Front-End Debt-to-Income ratio. It is a financial metric used by lenders to evaluate a borrower's ability to manage housing-related expenses, specifically, their front-end debt obligations. FEDTI is a subset of the Debt-to-Income (DTI) ratio and is often used in the context of mortgage lending.
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
