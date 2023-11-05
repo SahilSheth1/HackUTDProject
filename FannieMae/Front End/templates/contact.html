@@ -4,6 +4,31 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Feedback / Contact</title>
     <style>
+        body {
+            background-color: #0d2242;
+        }
+        .container {
+            background-color: #fff;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        input.form-control {
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            transition: border-color 0.3s;
+        }
+
+        input.form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+            background-color: #f0f0f0
+        }
+        .error-message {
+            color: #dc3545;
+        }
+
         .navbar {
             background-color: #0d2242;
             transition: background-color 0.3s;
@@ -20,6 +45,22 @@
 
         .navbar-light .navbar-nav .nav-link:hover {
             color: #22420d;
+        }
+
+        .btn-primary {
+            background-color: #0d2242;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 3px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #22420d;
+            transform: scale(1.05);
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -44,5 +85,103 @@
             </ul>
         </div>
     </nav>
+
+    <body>
+        <div class="container">
+            <h1>Contact / Feedback</h1>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                    <small class="error-message" id="nameError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                    <small class="error-message" id="emailError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" class="form-control" id="phone" name="phone">
+                    <small class="error-message" id="phoneError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea class="form-control" id="message" name="message"></textarea>
+                    <small class="error-message" id="messageError"></small>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                bsCustomFileInput.init();
+                
+                $("#contactForm").submit(function (e) {
+                    e.preventDefault();
+                    const name = $("#name").val();
+                    const email = $("#email").val();
+                    const phone = $("#phone").val();
+                    const message = $("#message").val();
+                    let isValid = true;
+    
+                    // Simple form validation
+                    if (!name) {
+                        $("#nameError").text("Name is required");
+                        isValid = false;
+                    } else {
+                        $("#nameError").text("");
+                    }
+    
+                    if (!email || !isValidEmail(email)) {
+                        $("#emailError").text("Valid email is required");
+                        isValid = false;
+                    } else {
+                        $("#emailError").text("");
+                    }
+    
+                    if (!phone || !isValidPhone(phone)) {
+                        $("#phoneError").text("Valid phone number is required");
+                        isValid = false;
+                    } else {
+                        $("#phoneError").text("");
+                    }
+    
+                    if (!message) {
+                        $("#messageError").text("Message is required");
+                        isValid = false;
+                    } else {
+                        $("#messageError").text("");
+                    }
+    
+                    if (isValid) {
+                        // You can submit the form data to your server here
+                        alert("Form submitted successfully. Thank you for reaching out!");
+
+                        // Clear form fields
+                        $("#name").val("");
+                        $("#email").val("");
+                        $("#phone").val("");
+                        $("#message").val("");
+                    }
+                });
+    
+                function isValidEmail(email) {
+                    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zAZ0-9.-]+\.[a-zA-Z]{2,4}$/;
+                    return emailPattern.test(email);
+                }
+    
+                function isValidPhone(phone) {
+                    // You can add custom phone number validation here
+                    // For simplicity, we'll check if the input contains only digits
+                    return /^\d+$/.test(phone);
+                }
+            });
+        </script>
+    </body>
 </body>
 </html>
