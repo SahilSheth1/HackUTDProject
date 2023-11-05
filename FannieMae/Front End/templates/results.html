@@ -3,9 +3,11 @@
 <head>
     <title>Result</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <style>
         body {
-            background-color: #f5f5f5;
+            background-color: #0d2242;
+            color: #fff;
         }
 
         .container {
@@ -25,6 +27,7 @@
         p {
             font-size: 16px;
             margin-bottom: 10px;
+            color: #0d2242;
         }
 
         .approved {
@@ -36,30 +39,287 @@
             color: #dc3545; /* Red color for "Not Approved" */
             font-weight: bold;
         }
+
+        .navbar {
+            background-color: #0d2242;
+            transition: background-color 0.3s;
+        }
+
+        .navbar-light .navbar-toggler-icon {
+            background-color: #fff; 
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: #0d2242;
+            transition: color 0.3s;
+        }
+
+        .navbar-light .navbar-nav .nav-link:hover {
+            color: #22420d;
+        }
+
+        /* Add styles for buttons */
+        .btn-primary {
+            background-color: #0d2242;
+            transition: transform 0.2s;
+            
+        }
+
+        /* Add hover effect for buttons */
+        .btn-primary:hover {
+            background-color: #22420d;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Loan Calculator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('index') }}">Loan Approval Calculator</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('links') }}">Helpful Links / FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('contact') }}">Feedback / Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container">
         <h1 class="mt-4">Calculated Values</h1>
-        <p><strong>Gross Monthly Income:</strong> ${{ gmi }}</p>
-        <p><strong>Credit Card Payment:</strong> ${{ ccp }}</p>
-        <p><strong>Car Payment:</strong> ${{ cp }}</p>
-        <p><strong>Student Loan Payment:</strong> ${{ slp }}</p>
-        <p><strong>Appraised Value:</strong> ${{ av }}</p>
-        <p><strong>Down Payment:</strong> ${{ dp }}</p>
-        <p><strong>Loan Amount:</strong> ${{ la }}</p>
-        <p><strong>Monthly Mortgage Payment:</strong> ${{ mmp }}</p>
-        <p><strong>Credit Score:</strong> {{ cs }}</p>
-        <p><strong>Credit Rating:</strong> {{ goodCredit }}</p>
-        <p><strong>Loan To Value Ratio:</strong> {{ ltv }}</p>
-        <p><strong>Private Mortgage Insurance Rate:</strong> {{ pmiRate }}</p>
-        <p><strong>Monthly Debt:</strong> ${{ monthlyDebt }}</p>
-        <p><strong>DTI:</strong> {{ dti }}</p>
-        <p><strong>FEDTI:</strong> {{ fedti }}</p>
+        <p><strong>Your Gross Monthly Income Is:</strong> ${{ gmi }}</p>
+        <p><strong>Your Credit Card Payments Are:</strong> ${{ ccp }}</p>
+        <p><strong>Your Car Payments Are:</strong> ${{ cp }}</p>
+        <p><strong>Your Student Loan Payments Are:</strong> ${{ slp }}</p>
+        <p><strong>The Appraised Value Is:</strong> ${{ av }}</p>
+        <p><strong>Your Down Payment Is:</strong> ${{ dp }}</p>
+        <p><strong>The Loan Amount Is:</strong> ${{ la }}</p>
+        <p><strong>Your Monthly Mortgage Payments Are:</strong> ${{ mmp }}</p>
+        <p><strong>Your Credit Score Is:</strong> {{ cs }}</p>
+        <p><strong>Your Credit Rating Is:</strong> {{ goodCredit }}</p>
+        <p><strong>The Loan To Value Ratio Is:</strong> {{ ltv }}</p>
+        {% if pmiNeeded %}
+            <p><strong>Is Private Mortgage Insurance Needed:</strong> Yes</p>
+            <p><strong>The Private Mortgage Insurance Rate Is:</strong> {{ pmiRate }}</p>
+            <p><strong>The Private Mortgage Insurance Amount You Have To Pay Is:</strong> {{ pmiAmount }}</p>
+        {% endif %}
+        <p><strong>Your Monthly Debt Is:</strong> ${{ monthlyDebt }}</p>
+        <p><strong>Your Debt To Income Ratio Is:</strong> {{ dti }}</p>
+        <p><strong>The Front-End Debt To Income Ratio Is:</strong> {{ fedti }}</p>
 
         <p class="{% if approved %}approved{% else %}not-approved{% endif %}">
-            {% if approved %}Approved{% else %}Not Approved{% endif %}
+           {% if approved %}You Are Approved For The Loan{% else %}You Are Not Approved For The Loan{% endif %}
         </p>
-    </div>
+
+        {% if not approved %}
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="{{ url_for('links') }}" class="btn btn-primary btn-dynamic-animation">Click Here To Get Help With Your Finances</a>
+        </div>
+        {% endif %}
+
+        {% if approved %}
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="{{ url_for('contact') }}" class="btn btn-primary btn-dynamic-animation">Click Here To Contact A Professional To Finalize Your Loan</a>
+        </div>
+        {% endif %}
+        
+        <div style="margin-top: 40px">
+            <h2 style="text-align: center; background-color: #0d2242; color: #fff; padding: 5px;">Property Comparison</h2>
+            <button id="toggleChartType" type="button" class="btn btn-primary btn-dynamic-animation">Toggle Loan To Value Chart Type</button>
+            <canvas id="propertyChart" width="400" height="200"></canvas>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <h2 style="text-align: center; background-color: #0d2242; color: #fff; padding: 5px;">Income and Debt Comparison</h2>
+            <button id="toggleIncomeDebtChartType" type="button" class="btn btn-primary btn-dynamic-animation">Toggle Income And Debt Chart Type</button>
+            <canvas id="incomeDebtChart" width="400" height="200"></canvas>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <h2 style="text-align: center; background-color: #0d2242; color: #fff; padding: 5px;">Mortgage, Income, and FEDTI Comparison</h2>
+            <button id="toggleMortgageIncomeFEDTIChartType" type="button" class="btn btn-primary btn-dynamic-animation">Toggle Mortgage, Income, And FEDTI Chart Type</button>
+            <canvas id="mortgageIncomeFEDTIChart" width="400" height="200"></canvas>
+        </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script>
+        var appraisedValue = {{ av|safe }};
+        var downPayment = {{ dp|safe }};
+        var loanToValueRatio = {{ ltv|safe }};
+    
+        var chartType = 'bar'; // Default chart type is bar
+    
+        var data = {
+            labels: ["Appraised Value", "Down Payment", "Loan To Value Ratio"],
+            datasets: [{
+                label: "Property Comparison",
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 1,
+                data: [appraisedValue, downPayment, loanToValueRatio]
+            }]
+        };
+    
+        var ctx = document.getElementById("propertyChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+            type: chartType, // Initial chart type
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    
+        // Toggle button click handler
+        document.getElementById("toggleChartType").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+    
+            if (chartType === 'bar') {
+                chartType = 'line';
+            } else {
+                chartType = 'bar';
+            }
+    
+            // Destroy the existing chart and create a new one with the selected type
+            myChart.destroy();
+            myChart = new Chart(ctx, {
+                type: chartType,
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+
+        var gmi = {{ gmi|safe }};
+        var monthlyDebt = {{ monthlyDebt|safe }};
+        var dti = {{ dti|safe }};
+
+    var incomeDebtData = {
+        labels: ["Gross Monthly Income", "Monthly Debt", "Debt-To-Income Ratio"],
+        datasets: [{
+            label: "Income and Debt Comparison",
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+            data: [gmi, monthlyDebt, dti]
+        }]
+    };
+
+    var incomeDebtChartType = 'bar'; // Default chart type is bar
+
+    var incomeDebtCtx = document.getElementById("incomeDebtChart").getContext("2d");
+    var incomeDebtChart = new Chart(incomeDebtCtx, {
+        type: incomeDebtChartType, // Initial chart type
+        data: incomeDebtData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Toggle button click handler for the new chart
+    document.getElementById("toggleIncomeDebtChartType").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        if (incomeDebtChartType === 'bar') {
+            incomeDebtChartType = 'line';
+        } else {
+            incomeDebtChartType = 'bar';
+        }
+
+        // Destroy the existing chart and create a new one with the selected type
+        incomeDebtChart.destroy();
+        incomeDebtChart = new Chart(incomeDebtCtx, {
+            type: incomeDebtChartType,
+            data: incomeDebtData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+
+    var mmp = {{ mmp|safe }};
+    var gmi = {{ gmi|safe }};
+    var fedti = {{ fedti|safe }};
+
+    var mortgageIncomeFEDTIData = {
+        labels: ["Monthly Mortgage Payment", "Gross Monthly Income", "Front-End Debt-To-Income Ratio"],
+        datasets: [{
+            label: "Mortgage, Income, and FEDTI Comparison",
+            backgroundColor: "rgba(255, 206, 86, 0.2)",
+            borderColor: "rgba(255, 206, 86, 1)",
+            borderWidth: 1,
+            data: [mmp, gmi, fedti]
+        }]
+    };
+
+    var mortgageIncomeFEDTIChartType = 'bar'; // Default chart type is bar
+
+    var mortgageIncomeFEDTICtx = document.getElementById("mortgageIncomeFEDTIChart").getContext("2d");
+    var mortgageIncomeFEDTIChart = new Chart(mortgageIncomeFEDTICtx, {
+        type: mortgageIncomeFEDTIChartType, // Initial chart type
+        data: mortgageIncomeFEDTIData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Toggle button click handler for the new chart
+    document.getElementById("toggleMortgageIncomeFEDTIChartType").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        if (mortgageIncomeFEDTIChartType === 'bar') {
+            mortgageIncomeFEDTIChartType = 'line';
+        } else {
+            mortgageIncomeFEDTIChartType = 'bar';
+        }
+
+        // Destroy the existing chart and create a new one with the selected type
+        mortgageIncomeFEDTIChart.destroy();
+        mortgageIncomeFEDTIChart = new Chart(mortgageIncomeFEDTICtx, {
+            type: mortgageIncomeFEDTIChartType,
+            data: mortgageIncomeFEDTIData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+    </script>
+    
+    
+
+    
 </body>
 </html>

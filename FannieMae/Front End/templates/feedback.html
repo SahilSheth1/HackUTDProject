@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback</title>
+    <!-- Include any necessary stylesheets or scripts -->
+</head>
+<body>
+    <div class="container">
+        <h1>Feedback</h1>
+        <p>Please provide your feedback below:</p>
+
+        <form method="post" action="/submit_feedback">
+            <!-- Add your feedback form fields here -->
+            <div class="form-group">
+                <label for="name">Your Name:</label>
+                <input type="text" class="form-control" name="name" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="feedback">Feedback:</label>
+                <textarea class="form-control" name="feedback" id="feedback" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+        </form>
+    </div>
+</body>
+</html>
