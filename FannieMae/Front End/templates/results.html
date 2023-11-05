@@ -111,14 +111,23 @@
             <button id="toggleChartType"type = "button" class="btn btn-primary">Toggle Chart Type</button>
         </div>
         <canvas id="propertyChart" width="400" height="200"></canvas>
+
+        <div>
+            <button id="toggleIncomeDebtChartType" type="button" class="btn btn-primary">Toggle Income and Debt Chart Type</button>
+        </div>
+        <canvas id="incomeDebtChart" width="400" height="200"></canvas>
+        <div>
+            <button id="toggleMortgageIncomeFEDTIChartType" type="button" class="btn btn-primary">Toggle Mortgage, Income, and FEDTI Chart Type</button>
+        </div>
+        <canvas id="mortgageIncomeFEDTIChart" width="400" height="200"></canvas>
     </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <script>
-        var appraisedValue = {{av}};
-        var downPayment = {{safe}};
-        var loanToValueRatio = {{ltv}};
+        var appraisedValue = {{ av|safe }};
+        var downPayment = {{ dp|safe }};
+        var loanToValueRatio = {{ ltv|safe }};
     
         var chartType = 'bar'; // Default chart type is bar
     
@@ -170,9 +179,121 @@
                 }
             });
         });
+
+        var gmi = {{ gmi|safe }};
+        var monthlyDebt = {{ monthlyDebt|safe }};
+        var dti = {{ dti|safe }};
+
+    var incomeDebtData = {
+        labels: ["Gross Monthly Income", "Monthly Debt", "Debt-To-Income Ratio"],
+        datasets: [{
+            label: "Income and Debt Comparison",
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+            data: [gmi, monthlyDebt, dti]
+        }]
+    };
+
+    var incomeDebtChartType = 'bar'; // Default chart type is bar
+
+    var incomeDebtCtx = document.getElementById("incomeDebtChart").getContext("2d");
+    var incomeDebtChart = new Chart(incomeDebtCtx, {
+        type: incomeDebtChartType, // Initial chart type
+        data: incomeDebtData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Toggle button click handler for the new chart
+    document.getElementById("toggleIncomeDebtChartType").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        if (incomeDebtChartType === 'bar') {
+            incomeDebtChartType = 'line';
+        } else {
+            incomeDebtChartType = 'bar';
+        }
+
+        // Destroy the existing chart and create a new one with the selected type
+        incomeDebtChart.destroy();
+        incomeDebtChart = new Chart(incomeDebtCtx, {
+            type: incomeDebtChartType,
+            data: incomeDebtData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+
+    var mmp = {{ mmp|safe }};
+    var gmi = {{ gmi|safe }};
+    var fedti = {{ fedti|safe }};
+
+    var mortgageIncomeFEDTIData = {
+        labels: ["Monthly Mortgage Payment", "Gross Monthly Income", "Front-End Debt-To-Income Ratio"],
+        datasets: [{
+            label: "Mortgage, Income, and FEDTI Comparison",
+            backgroundColor: "rgba(255, 206, 86, 0.2)",
+            borderColor: "rgba(255, 206, 86, 1)",
+            borderWidth: 1,
+            data: [mmp, gmi, fedti]
+        }]
+    };
+
+    var mortgageIncomeFEDTIChartType = 'bar'; // Default chart type is bar
+
+    var mortgageIncomeFEDTICtx = document.getElementById("mortgageIncomeFEDTIChart").getContext("2d");
+    var mortgageIncomeFEDTIChart = new Chart(mortgageIncomeFEDTICtx, {
+        type: mortgageIncomeFEDTIChartType, // Initial chart type
+        data: mortgageIncomeFEDTIData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Toggle button click handler for the new chart
+    document.getElementById("toggleMortgageIncomeFEDTIChartType").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        if (mortgageIncomeFEDTIChartType === 'bar') {
+            mortgageIncomeFEDTIChartType = 'line';
+        } else {
+            mortgageIncomeFEDTIChartType = 'bar';
+        }
+
+        // Destroy the existing chart and create a new one with the selected type
+        mortgageIncomeFEDTIChart.destroy();
+        mortgageIncomeFEDTIChart = new Chart(mortgageIncomeFEDTICtx, {
+            type: mortgageIncomeFEDTIChartType,
+            data: mortgageIncomeFEDTIData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
     </script>
+    
     
 
     
 </body>
 </html>
+ 
