@@ -7,6 +7,14 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/help', methods = ["GET"])
+def links():
+    return render_template('links.html')
+
+@app.route('/contact', methods = ["GET"])
+def contact():
+    return render_template('contact.html')
+
 @app.route('/submit', methods=['POST'])
 def submit():
     gmi = float(request.form.get('gmi'))

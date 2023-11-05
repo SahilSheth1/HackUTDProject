@@ -84,10 +84,10 @@
                     <a class="nav-link" href="{{ url_for('index') }}">Loan Approval Calculator</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Helpful Links / FAQ</a>
+                    <a class="nav-link" href="{{ url_for('links') }}">Helpful Links / FAQ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Feedback / Contact</a>
+                    <a class="nav-link" href="{{ url_for('contact') }}">Feedback / Contact</a>
                 </li>
             </ul>
         </div>
@@ -122,13 +122,13 @@
 
         {% if not approved %}
         <div style="text-align: center; margin-top: 20px;">
-            <a href="#" class="btn btn-primary btn-dynamic-animation">Click Here To Get Help With Your Finances</a>
+            <a href="{{ url_for('links') }}" class="btn btn-primary btn-dynamic-animation">Click Here To Get Help With Your Finances</a>
         </div>
         {% endif %}
 
         {% if approved %}
         <div style="text-align: center; margin-top: 20px;">
-            <a href="#" class="btn btn-primary btn-dynamic-animation">Click Here To Contact A Professional To Finalize Your Loan</a>
+            <a href="{{ url_for('contact') }}" class="btn btn-primary btn-dynamic-animation">Click Here To Contact A Professional To Finalize Your Loan</a>
         </div>
         {% endif %}
         
