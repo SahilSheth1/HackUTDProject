@@ -70,11 +70,27 @@
             background-color: #22420d;
             transform: scale(1.05);
         }
+        .image-button{
+            border: none;
+            padding: 0;
+            background: none;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{{ url_for('index') }}">Loan Calculator</a>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <button class="image-button" onclick="refreshPage()">
+            <img src="{{ url_for('static', filename='home.png') }}" alt="Button Logo" style="width: 50px; height: 50px;" >
+        </button>
+        <script>
+            function refreshPage() {
+                window.location.href = '/'
+            }
+        </script>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -110,7 +126,7 @@
         {% if pmiNeeded %}
             <p><strong>Is Private Mortgage Insurance Needed:</strong> Yes</p>
             <p><strong>The Private Mortgage Insurance Rate Is:</strong> {{ pmiRate }}</p>
-            <p><strong>The Private Mortgage Insurance Amount You Have To Pay Is:</strong> {{ pmiAmount }}</p>
+            <p><strong>The Private Mortgage Insurance Amount You Have To Pay Is:</strong> ${{ pmiAmount }}</p>
         {% endif %}
         <p><strong>Your Monthly Debt Is:</strong> ${{ monthlyDebt }}</p>
         <p><strong>Your Debt To Income Ratio Is:</strong> {{ dti }}</p>
