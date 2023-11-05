@@ -20,5 +20,10 @@
     <p>Monthly Debt: {{ monthlyDebt }}</p>
     <p>DTI: {{ dti }}</p>
     <p>FEDTI: {{ fedti }}</p>
+    {% if approved %}
+        <p>Approved</p>
+    {% else %}
+        <p>Not Approved</p>
+    {% endif %}
 </body>
 </html>

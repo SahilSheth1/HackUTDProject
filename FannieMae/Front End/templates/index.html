@@ -2,32 +2,133 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Approval Calculator</title>
+    <style>
+        body {
+            background-color: #0d2242;
+        }
+
+        .container {
+            background-color: #fff;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 30px;
+            text-align: center;
+            color: #0d2242;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input.form-control {
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            transition: border-color 0.3s;
+        }
+
+        input.form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+        }
+
+        button.btn-primary {
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 3px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button.btn-primary:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .navbar {
+            background-color: #0d2242;
+        }
+
+        .navbar a {
+            color: #fff;
+        }
+
+        .navbar-logo {
+            width: 200px; /* Set the desired width */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: auto;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>User Input Form</h1>
-        <form method="post" action="/submit">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#"><img src="assests/mae logo.png" alt="Fannie Mae Logo" width = 200px height = 200px class="navbar-logo"></a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="navbar-brand" href="#">Approval Calculator</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-brand" href="#">Helpful Links</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-brand" href="#">Contact</a>
+            </li>
+        </ul>
+    </nav>
+    
+    <div class="container mt-5">
+        <h1 class="mt-5">Loan Approval Calculator</h1>
+        <form method="post" action="/submit" class="mt-4">
             <div class="form-group">
-                <label for="textInput">Enter Gross Monthly Income:</label>
-                <input type="text" class="form-control" name="gmi" id="textInput" placeholder="Enter Gross Monthly Income">
-                <label for="textInput">Credit Card Payment:</label>
-                <input type="text" class="form-control" name="ccp" id="textInput" placeholder="Enter Credit Card Payment">
-                <label for="textInput">Enter Car Payment:</label>
-                <input type="text" class="form-control" name="cp" id="textInput" placeholder="Enter Car Payment">
-                <label for="textInput">Enter Student Loan Payments:</label>
-                <input type="text" class="form-control" name="slp" id="textInput" placeholder="Enter Student Loan Payments">
-                <label for="textInput">Enter Appraised Value:</label>
-                <input type="text" class="form-control" name="av" id="textInput" placeholder="Enter Appraised Value">
-                <label for="textInput">Enter Down Payment:</label>
-                <input type="text" class="form-control" name="dp" id="textInput" placeholder="Enter Down Payment">
-                <label for="textInput">Enter Loan Amount:</label>
-                <input type="text" class="form-control" name="la" id="textInput" placeholder="Enter Loan Amount">
-                <label for="textInput">Enter Monthly Mortgage Payment:</label>
-                <input type="text" class="form-control" name="mmp" id="textInput" placeholder="Enter Monthly Mortgage Payment">
-                <label for="textInput">Enter Credit Score:</label>
-                <input type="text" class="form-control" name="cs" id="textInput" placeholder="Enter Credit Score">
+                <label for="gmi">Enter Gross Monthly Income:</label>
+                <input type="text" class="form-control" name="gmi" id="gmi" placeholder="Enter Gross Monthly Income">
             </div>
-
+            <div class="form-group">
+                <label for="ccp">Credit Card Payment:</label>
+                <input type="text" class="form-control" name="ccp" id="ccp" placeholder="Enter Credit Card Payment">
+            </div>
+            <div class="form-group">
+                <label for="cp">Enter Car Payment:</label>
+                <input type="text" class="form-control" name="cp" id="cp" placeholder="Enter Car Payment">
+            </div>
+            <div class="form-group">
+                <label for="slp">Enter Student Loan Payments:</label>
+                <input type="text" class="form-control" name="slp" id="slp" placeholder="Enter Student Loan Payments">
+            </div>
+            <div class="form-group">
+                <label for="av">Enter Appraised Value:</label>
+                <input type="text" class="form-control" name="av" id="av" placeholder="Enter Appraised Value">
+            </div>
+            <div class="form-group">
+                <label for="dp">Enter Down Payment:</label>
+                <input type="text" class="form-control" name="dp" id="dp" placeholder="Enter Down Payment">
+            </div>
+            <div class="form-group">
+                <label for="la">Enter Loan Amount:</label>
+                <input type="text" class="form-control" name="la" id="la" placeholder="Enter Loan Amount">
+            </div>
+            <div class="form-group">
+                <label for="mmp">Enter Monthly Mortgage Payment:</label>
+                <input type="text" class="form-control" name="mmp" id="mmp" placeholder="Enter Monthly Mortgage Payment">
+            </div>
+            <div class="form-group">
+                <label for="cs">Enter Credit Score:</label>
+                <input type="text" class="form-control" name="cs" id="cs" placeholder="Enter Credit Score">
+            </div>
+        
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
