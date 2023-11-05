@@ -57,6 +57,19 @@
         .navbar-light .navbar-nav .nav-link:hover {
             color: #22420d;
         }
+
+        /* Add styles for buttons */
+        .btn-primary {
+            background-color: #0d2242;
+            transition: transform 0.2s;
+            
+        }
+
+        /* Add hover effect for buttons */
+        .btn-primary:hover {
+            background-color: #22420d;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -106,21 +119,36 @@
         <p class="{% if approved %}approved{% else %}not-approved{% endif %}">
            {% if approved %}You Are Approved For The Loan{% else %}You Are Not Approved For The Loan{% endif %}
         </p>
-        
-        <div>
-            <button id="toggleChartType"type = "button" class="btn btn-primary">Toggle Chart Type</button>
-        </div>
-        <canvas id="propertyChart" width="400" height="200"></canvas>
 
-        <div>
-            <button id="toggleIncomeDebtChartType" type="button" class="btn btn-primary">Toggle Income and Debt Chart Type</button>
+        {% if not approved %}
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="#" class="btn btn-primary btn-dynamic-animation">Click Here To Get Help With Your Finances</a>
         </div>
-        <canvas id="incomeDebtChart" width="400" height="200"></canvas>
-        <div>
-            <button id="toggleMortgageIncomeFEDTIChartType" type="button" class="btn btn-primary">Toggle Mortgage, Income, and FEDTI Chart Type</button>
+        {% endif %}
+
+        {% if approved %}
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="#" class="btn btn-primary btn-dynamic-animation">Click Here To Contact A Professional To Finalize Your Loan</a>
         </div>
-        <canvas id="mortgageIncomeFEDTIChart" width="400" height="200"></canvas>
-    </div>
+        {% endif %}
+        
+        <div style="margin-top: 40px">
+            <h2 style="text-align: center; background-color: #0d2242; color: #fff; padding: 5px;">Property Comparison</h2>
+            <button id="toggleChartType" type="button" class="btn btn-primary btn-dynamic-animation">Toggle Loan To Value Chart Type</button>
+            <canvas id="propertyChart" width="400" height="200"></canvas>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <h2 style="text-align: center; background-color: #0d2242; color: #fff; padding: 5px;">Income and Debt Comparison</h2>
+            <button id="toggleIncomeDebtChartType" type="button" class="btn btn-primary btn-dynamic-animation">Toggle Income And Debt Chart Type</button>
+            <canvas id="incomeDebtChart" width="400" height="200"></canvas>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <h2 style="text-align: center; background-color: #0d2242; color: #fff; padding: 5px;">Mortgage, Income, and FEDTI Comparison</h2>
+            <button id="toggleMortgageIncomeFEDTIChartType" type="button" class="btn btn-primary btn-dynamic-animation">Toggle Mortgage, Income, And FEDTI Chart Type</button>
+            <canvas id="mortgageIncomeFEDTIChart" width="400" height="200"></canvas>
+        </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
