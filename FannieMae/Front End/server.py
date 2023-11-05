@@ -3,7 +3,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods = ["GET", "POST"])
 def index():
     return render_template('index.html')
 
@@ -26,10 +26,12 @@ def submit():
 
     ltv = round((av - dp) / av, 2)
 
-    pmiRate = 1.01
+    pmiAmount = 0
     pmiNeeded = False
+    pmiRate = 1.01
 
     if ltv > 0.8:
+        pmiAmount = round(av * 0.01, 2)
         av = round(av * 1.01, 2)
         pmiNeeded = True
 
@@ -44,7 +46,7 @@ def submit():
     if ltv < 0.95 and dti < 0.43 and fedti < 0.28:
         approved = True
 
-    return render_template('results.html', gmi=f"{gmi:.2f}", ccp=f"{ccp:.2f}", cp=f"{cp:.2f}", slp=f"{slp:.2f}", av=f"{av:.2f}", dp=f"{dp:.2f}", la=f"{la:.2f}", mmp=f"{mmp:.2f}", cs=f"{cs:.2f}", goodCredit=goodCredit, pmiRate=f"{pmiRate:.2f}", ltv=f"{ltv:.2f}", monthlyDebt=f"{monthlyDebt:.2f}", dti=f"{dti:.2f}", fedti=f"{fedti:.2f}", approved=approved)
+    return render_template('results.html', gmi=f"{gmi:.2f}", ccp=f"{ccp:.2f}", cp=f"{cp:.2f}", slp=f"{slp:.2f}", av=f"{av:.2f}", dp=f"{dp:.2f}", la=f"{la:.2f}", mmp=f"{mmp:.2f}", cs=cs, goodCredit=goodCredit, pmiNeeded = pmiNeeded, pmiRate = f"{pmiRate:.2f}", pmiAmount=f"{pmiAmount:.2f}", ltv=f"{ltv:.2f}", monthlyDebt=f"{monthlyDebt:.2f}", dti=f"{dti:.2f}", fedti=f"{fedti:.2f}", approved=approved)
 
 if __name__ == "__main__":
     app.run(debug=True)
