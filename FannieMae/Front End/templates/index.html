@@ -78,6 +78,39 @@
             transition: background-color 0.3s, transform 0.3s;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
+
+        /* styles.css */
+
+        /* Style the button */
+        .image-button {
+            background-color: #f9f8fa;
+            color: #f9f8fa;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        /* Style the image within the button */
+        .image-button img {
+            width: 200px; /* Adjust the width as needed */
+            height: auto; /* Maintain the image's aspect ratio */
+            display: block; /* Remove any default inline spacing */
+            margin: 0 auto; /* Center the image horizontally within the button */
+        }
+
+        /* Add hover effect on the button */
+        .image-button:hover {
+            background-color: #bcbdbf; /* Darker blue on hover */
+        }
+
+        /* Add some space above and below the button */
+        .button-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
     </style>
 </head>
 
@@ -92,23 +125,25 @@
                 location.reload();
             }
         </script>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Loan Approval Calculator</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Helpful Links / FAQ</a>
-                </li>
-                <li class "nav-item">
-                    <a class="nav-link" href="#">Feedback / Contact</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Loan Calculator</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('index') }}">Loan Approval Calculator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('links') }}">Helpful Links / FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contact') }}">Feedback / Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     
 
     <div class="container">
